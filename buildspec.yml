@@ -37,7 +37,7 @@ phases:
     commands:
       - echo "hello"
       - printenv
-      - echo "hello"
+      - echo "hello2"
       # - command
   #post_build:
     #commands:
