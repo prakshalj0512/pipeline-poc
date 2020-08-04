@@ -53,7 +53,7 @@ phases:
 artifacts:
   files:
     - AppSpec.yaml
-    # - location
+    - lambda_function_${$LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
   #name: $(date +%Y-%m-%d)
   #discard-paths: yes
   #base-directory: location
