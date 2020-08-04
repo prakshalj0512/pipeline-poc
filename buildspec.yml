@@ -35,6 +35,7 @@ phases:
       # - command
   build:
     commands:
+      - printenv
       - . scripts/deploy.sh
       # - command
   #post_build:
