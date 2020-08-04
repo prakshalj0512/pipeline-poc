@@ -4,11 +4,11 @@ echo $LAMBDA_FUNCTION_NAME
 echo $CODE_DEPLOY_APP_NAME
 echo $LAMBDA_FUNCTION_ALIAS
 
-CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name pjain-func --name dev | jq -r '.FunctionVersion')
+CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
 zip function.zip function/*
 
-aws lambda update-function-code --function_name $LAMBDA_FUNCTION_NAME --zip-file fileb://function.zip --publish >response.json
+aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://function.zip --publish > response.json
 TARGET_VERSION=$(cat response.json | jq -r '.Version')
 
 cat > AppSpec.yaml << EOM
@@ -22,5 +22,3 @@ Resources:
       CurrentVersion: $CURRENT_LAMBDA_VERSION
       TargetVersion: $TARGET_VERSION
 EOM
-
-
