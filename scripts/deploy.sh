@@ -23,5 +23,3 @@ Resources:
       CurrentVersion: $CURRENT_LAMBDA_VERSION
       TargetVersion: $TARGET_VERSION
 EOM
-
-#
