@@ -52,7 +52,7 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-    - AppSpec.yaml
+    - AppSpec.yml
   #name: $(date +%Y-%m-%d)
   discard-paths: yes
   #base-directory: location
