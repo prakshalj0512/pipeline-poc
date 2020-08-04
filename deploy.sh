@@ -4,3 +4,4 @@ echo $LAMBDA_FUNCTION_NAME
 echo $CODE_DEPLOY_APP_NAME
 
 aws lambda list-functions
+aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name dev
