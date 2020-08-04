@@ -6,7 +6,7 @@ echo $LAMBDA_FUNCTION_ALIAS
 
 CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
-zip lambda_function.zip function/*
+zip -rj lambda_function.zip function/*
 
 aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 TARGET_VERSION=$(cat response.json | jq -r '.Version')
