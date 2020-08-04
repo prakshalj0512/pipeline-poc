@@ -35,9 +35,8 @@ phases:
       # - command
   build:
     commands:
-      - echo "hello"
       - printenv
-      - echo "hello2"
+      - sh deploy.sh
       # - command
   #post_build:
     #commands:
