@@ -35,10 +35,7 @@ phases:
       # - command
   build:
     commands:
-      - printenv
       - . scripts/deploy.sh
-      - printenv
-      - echo $TARGET_VERSION
       # - command
   #post_build:
     #commands:
