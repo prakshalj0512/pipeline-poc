@@ -11,7 +11,7 @@ zip lambda_function.zip function/*
 aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 TARGET_VERSION=$(cat response.json | jq -r '.Version')
 EXPORT TARGET_VERSION=$(cat response.json | jq -r '.Version')
-mv lambda_function.zip lambda_function_${$LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
+mv lambda_function.zip lambda_function_$LAMBDA_FUNCTION_ALIAS_$TARGET_VERSION.zip
 
 cat > AppSpec.yaml << EOM
 version: 0
