@@ -6,10 +6,12 @@ echo $LAMBDA_FUNCTION_ALIAS
 
 CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
-zip function.zip function/*
+zip lambda_function.zip function/*
 
-aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://function.zip --publish > response.json
+aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip.zip --publish > response.json
 TARGET_VERSION=$(cat response.json | jq -r '.Version')
+EXPORT TARGET_VERSION=$(cat response.json | jq -r '.Version')
+mv lambda_function.zip lambda_function_${$LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
 
 cat > AppSpec.yaml << EOM
 version: 0
