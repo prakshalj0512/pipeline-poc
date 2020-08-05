@@ -54,12 +54,10 @@ phases:
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
 artifacts:
+  files:
+    - packaged.yaml
   secondary-artifacts:
       artifact1:
-        base-directory: $CODEBUILD_SRC_DIR
-        files:
-          - packaged.yaml
-      artifact2:
         base-directory: $CODEBUILD_SRC_DIR
         files:
           - "*.zip"
