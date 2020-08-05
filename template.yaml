@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: My Lambda function
+Resources:
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: pjain-funcer
+      Description: My Lambda function
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: s3://pjain-git-s3/app-dev.zip
+      AutoPublishAlias: live
+      Timeout: 30
+      DeploymentPreference:
+        Enabled: True
+        Type: Linear10PercentEvery1Minute

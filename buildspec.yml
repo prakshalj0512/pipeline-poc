@@ -37,6 +37,7 @@ phases:
     commands:
       - printenv 
       - . scripts/deploy.sh
+      - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
       # - command
   #post_build:
     #commands:
@@ -52,7 +53,7 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-    - AppSpec.yml
+    - packaged.yaml
   #name: $(date +%Y-%m-%d)
   # discard-paths: yes
   #base-directory: location
