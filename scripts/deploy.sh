@@ -24,4 +24,24 @@ Resources:
       TargetVersion: $TARGET_VERSION
 EOM
 
-cat AppSpec.yml
+cat > template.yaml << EOM
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: My Lambda function
+Resources:
+  LambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: pjain-funcer
+      Description: My Lambda function
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.7
+      CodeUri: s3://${S3_BUCKET}/lambda_function_${LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
+      AutoPublishAlias: live
+      Timeout: 30
+      DeploymentPreference:
+        Enabled: True
+        Type: Linear10PercentEvery1Minute
+EOM
+
+cat template.yaml
