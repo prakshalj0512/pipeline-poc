@@ -58,8 +58,8 @@ artifacts:
     - packaged.yaml
     - '*.zip'
   #name: $(date +%Y-%m-%d)
-  discard-paths: yes
-  base-directory: '/'
+  # discard-paths: yes
+  # base-directory: '/'
 #cache:
   #paths:
     # - paths
