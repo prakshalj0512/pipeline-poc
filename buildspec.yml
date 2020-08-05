@@ -37,6 +37,7 @@ phases:
     commands:
       - printenv
       - . scripts/deploy.sh
+      - ls
       - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
       # - command
   #post_build:
