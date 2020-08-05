@@ -35,7 +35,7 @@ phases:
       # - command
   build:
     commands:
-      - printenv
+      - printenv 
       - . scripts/deploy.sh
       - ls
       - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
@@ -55,6 +55,7 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
+    - '*.zip'
     - packaged.yaml
   name: "/"
   # discard-paths: yes
