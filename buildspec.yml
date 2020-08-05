@@ -58,7 +58,6 @@ artifacts:
     - packaged.yaml
   secondary-artifacts:
       artifact1:
-        base-directory: $CODEBUILD_SRC_DIR
         files:
           - "*.zip"
   # discard-paths: yes
