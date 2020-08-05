@@ -57,7 +57,7 @@ artifacts:
   files:
     - packaged.yaml
     - '*.zip'
-  #name: $(date +%Y-%m-%d)
+  name: "/"
   # discard-paths: yes
   # base-directory: '/'
 #cache:
