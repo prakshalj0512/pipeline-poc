@@ -39,6 +39,7 @@ phases:
       - . scripts/deploy.sh
       - ls
       - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
+      - ls
       # - command
   #post_build:
     #commands:
@@ -57,7 +58,7 @@ artifacts:
     - packaged.yaml
     - '*.zip'
   #name: $(date +%Y-%m-%d)
-  # discard-paths: yes
+  discard-paths: yes
   #base-directory: location
 #cache:
   #paths:
