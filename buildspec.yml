@@ -37,7 +37,7 @@ phases:
     commands:
       - printenv
       - . scripts/deploy.sh
-      - ls
+      - ls 
       - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
       - ls -ld $PWD/*
       - aws s3 cp *.zip s3://pjain-git-s3
