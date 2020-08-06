@@ -1,6 +1,5 @@
 echo $S3_BUCKET
 echo $LAMBDA_FUNCTION_NAME
-
 # CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
 zip -rj lambda_function.zip function/*
@@ -35,6 +34,7 @@ Resources:
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
       CodeUri: s3://${S3_BUCKET}/${LAMBDA_FUNCTION_NAME}_${UNIQUE_ID}.zip
+      AutoPublishAlias: $LATEST
       Timeout: 30
       DeploymentPreference:
         Enabled: True
