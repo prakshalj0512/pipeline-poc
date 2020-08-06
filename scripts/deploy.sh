@@ -1,6 +1,5 @@
 echo $S3_BUCKET
 echo $LAMBDA_FUNCTION_NAME
-echo $LAMBDA_FUNCTION_ALIAS
 
 # CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
@@ -9,7 +8,7 @@ zip -rj lambda_function.zip function/*
 # aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 # TARGET_VERSION=$(cat response.json | jq -r '.Version')
 UNIQUE_ID=$(openssl rand -base64 12)
-mv lambda_function.zip lambda_function_${LAMBDA_FUNCTION_ALIAS}_${UNIQUE_ID}.zip
+mv lambda_function.zip ${LAMBDA_FUNCTION_NAME}_${UNIQUE_ID}.zip
 
 # cat > AppSpec.yml << EOM
 # version: 0
@@ -35,8 +34,7 @@ Resources:
       Description: My Lambda function
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/lambda_function_${LAMBDA_FUNCTION_ALIAS}_${UNIQUE_ID}.zip
-      AutoPublishAlias: live
+      CodeUri: s3://${S3_BUCKET}/${LAMBDA_FUNCTION_NAME}_${UNIQUE_ID}.zip
       Timeout: 30
       DeploymentPreference:
         Enabled: True
