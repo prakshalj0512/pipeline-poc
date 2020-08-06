@@ -8,7 +8,8 @@ zip -rj lambda_function.zip function/*
 
 # aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 # TARGET_VERSION=$(cat response.json | jq -r '.Version')
-mv lambda_function.zip lambda_function_${LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
+UNIQUE_ID=$(openssl rand -base64 12)
+mv lambda_function.zip lambda_function_${LAMBDA_FUNCTION_ALIAS}_${UNIQUE_ID}.zip
 
 # cat > AppSpec.yml << EOM
 # version: 0
@@ -34,7 +35,7 @@ Resources:
       Description: My Lambda function
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/lambda_function_${LAMBDA_FUNCTION_ALIAS}_${TARGET_VERSION}.zip
+      CodeUri: s3://${S3_BUCKET}/lambda_function_${LAMBDA_FUNCTION_ALIAS}_${UNIQUE_ID}.zip
       AutoPublishAlias: live
       Timeout: 30
       DeploymentPreference:
