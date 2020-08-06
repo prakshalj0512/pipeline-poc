@@ -55,8 +55,8 @@ phases:
     #file-format: JunitXml | CucumberJson
 artifacts:
   files:
-    - "**/*"
-  # discard-paths: yes
+    - "packaged.yaml"
+  discard-paths: yes
   # base-directory: '/'
 #cache:
   #paths:
