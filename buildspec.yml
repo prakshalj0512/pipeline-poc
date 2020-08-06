@@ -56,7 +56,7 @@ phases:
 artifacts:
   files:
     - "packaged.yaml"
-  discard-paths: yes 
+  discard-paths: yes
   # base-directory: '/'
 #cache:
   #paths:
