@@ -5,6 +5,7 @@ echo $LAMBDA_FUNCTION_NAME
 zip -rj lambda_function.zip function/*
 
 # aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
+# aws lambda get-version alias functinon_name
 # TARGET_VERSION=$(cat response.json | jq -r '.Version')
 UNIQUE_ID=$(openssl rand -base64 12)
 # mv lambda_function.zip ${LAMBDA_FUNCTION_NAME}_${UNIQUE_ID}.zip
@@ -19,7 +20,7 @@ Resources:
       FunctionName: ${LAMBDA_FUNCTION_NAME}
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/lambda_function.zip
+      CodeUri: s3://${S3_BUCKET}/pjain-func-dev_v4.zip
       AutoPublishAlias: default
       Timeout: 30
       DeploymentPreference:
