@@ -20,7 +20,7 @@ Resources:
       FunctionName: ${LAMBDA_FUNCTION_NAME}
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/pjain-func-dev_v4.zip
+      CodeUri: s3://${S3_BUCKET}/${LAMBDA_FUNCTION_NAME}.zip
       AutoPublishAlias: default
       Timeout: 30
       DeploymentPreference:
