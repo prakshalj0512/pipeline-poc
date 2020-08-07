@@ -4,8 +4,9 @@ echo $LAMBDA_FUNCTION_NAME
 
 CURRENT_LAMBDA_FUNCTION_VERSION=$(aws lambda list-versions-by-function --function-name pjain-func-dev --query "Versions[-1].[Version]" | grep -o -E '[0-9]+')
 ((CURRENT_LAMBDA_FUNCTION_VERSION++))
-zip -rj ${LAMBDA_FUNCTION_NAME}_${CURRENT_LAMBDA_FUNCTION_VERSION}.zip function/*
-aws s3 cp ${LAMBDA_FUNCTION_NAME}_${CURRENT_LAMBDA_FUNCTION_VERSION}.zip s3://${S3_BUCKET}
+TARGET_LAMBDA_FUNCTION_CODE="${LAMBDA_FUNCTION_NAME}_${CURRENT_LAMBDA_FUNCTION_VERSION}.zip"
+zip -rj ${TARGET_LAMBDA_FUNCTION_CODE} function/*
+aws s3 cp ${TARGET_LAMBDA_FUNCTION_CODE} s3://${S3_BUCKET}
 
 # aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 # aws lambda get-version alias functinon_name
@@ -23,7 +24,7 @@ Resources:
       FunctionName: ${LAMBDA_FUNCTION_NAME}
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/${LAMBDA_FUNCTION_NAME}_${CURRENT_LAMBDA_FUNCTION_VERSION}.zip
+      CodeUri: s3://${S3_BUCKET}/${TARGET_LAMBDA_FUNCTION_CODE}
       AutoPublishAlias: default
       Timeout: 30
       DeploymentPreference:
