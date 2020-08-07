@@ -2,7 +2,7 @@ echo $S3_BUCKET
 echo $LAMBDA_FUNCTION_NAME
 # CURRENT_LAMBDA_VERSION=$(aws lambda get-alias --function-name $LAMBDA_FUNCTION_NAME --name $LAMBDA_FUNCTION_ALIAS | jq -r '.FunctionVersion')
 
-zip -rj lambda_function.zip function/*
+zip -rj ${LAMBDA_FUNCTION_NAME}.zip function/*
 
 # aws lambda update-function-code --function-name $LAMBDA_FUNCTION_NAME --zip-file fileb://lambda_function.zip --publish > response.json
 # aws lambda get-version alias functinon_name
