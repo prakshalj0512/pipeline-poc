@@ -35,6 +35,7 @@ phases:
       # - command
   build:
     commands:
+      - echo $S3_BUCKET
       - . scripts/deploy.sh
       - sam package --template-file template.yaml --s3-bucket pjain-git-s3 --output-template-file packaged.yaml
   #post_build:
