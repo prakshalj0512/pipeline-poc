@@ -26,7 +26,7 @@ Resources:
       FunctionName: ${LAMBDA_FUNCTION_NAME}-${BRANCH}
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/${BRANCH}/${TARGET_LAMBDA_FUNCTION_CODE}
+      CodeUri: s3://${S3_BUCKET}/dne
       AutoPublishAlias: default
       Timeout: 30
       DeploymentPreference:
