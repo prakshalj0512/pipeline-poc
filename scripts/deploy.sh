@@ -6,6 +6,7 @@ echo $BRANCH
 FUNCTION_EXISTS=$(aws lambda wait function-exists --function-name ${LAMBDA_FUNCTION_NAME}-${BRANCH})
 EXIT_STATUS=$?
 if [ $EXIT_STATUS -ne 0 ]; then
+  echo "The function doesn't exist yet. Creating it..."
   TARGET_LAMBDA_VERSION=1
 else
   CURRENT_LAMBDA_FUNCTION_VERSION=$(aws lambda list-versions-by-function --function-name ${LAMBDA_FUNCTION_NAME}-${BRANCH} --query "Versions[-1].[Version]" | grep -o -E '[0-9]+')
