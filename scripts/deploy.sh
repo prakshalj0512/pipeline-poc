@@ -33,5 +33,4 @@ Resources:
         Enabled: True
         Type: ${LAMBDA_DEPLOYMENT_PREFERENCE}
 EOM
-
 cat template.yaml
