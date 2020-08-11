@@ -13,7 +13,7 @@ if [ $EXIT_STATUS -ne 0 ]; then
 else
   CURRENT_LAMBDA_FUNCTION_VERSION=$(aws lambda list-versions-by-function --function-name ${LAMBDA_FUNCTION_NAME}-${BRANCH} --query "Versions[-1].[Version]" | grep -o -E '[0-9]+')
   echo "New Current Version: ${CURRENT_LAMBDA_FUNCTION_VERSION}"
-  ((TARGET_LAMBDA_VERSION = CURRENT_LAMBDA_FUNCTION_VERSION++))
+  ((TARGET_LAMBDA_VERSION=CURRENT_LAMBDA_FUNCTION_VERSION++))
   echo "tried incrementing"
   echo "Target Version: ${TARGET_LAMBDA_VERSION}"
 fi
@@ -32,7 +32,7 @@ Resources:
       FunctionName: ${LAMBDA_FUNCTION_NAME}-${BRANCH}
       Handler: lambda_function.lambda_handler
       Runtime: python3.7
-      CodeUri: s3://${S3_BUCKET}/dne
+      CodeUri: s3://${S3_BUCKET}/${BRANCH}/${LAMBDA_FUNCTION_NAME}_v${TARGET_LAMBDA_VERSION}.zip
       AutoPublishAlias: default
       Timeout: 30
       DeploymentPreference:
