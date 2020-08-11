@@ -12,8 +12,9 @@ if [ $EXIT_STATUS -ne 0 ]; then
   echo "Target Version: ${TARGET_LAMBDA_VERSION}"
 else
   CURRENT_LAMBDA_FUNCTION_VERSION=$(aws lambda list-versions-by-function --function-name ${LAMBDA_FUNCTION_NAME}-${BRANCH} --query "Versions[-1].[Version]" | grep -o -E '[0-9]+')
-  echo "Current Version: ${CURRENT_LAMBDA_FUNCTION_VERSION}"
+  echo "New Current Version: ${CURRENT_LAMBDA_FUNCTION_VERSION}"
   ((TARGET_LAMBDA_VERSION = CURRENT_LAMBDA_FUNCTION_VERSION++))
+  echo "tried incrementing"
   echo "Target Version: ${TARGET_LAMBDA_VERSION}"
 fi
 
